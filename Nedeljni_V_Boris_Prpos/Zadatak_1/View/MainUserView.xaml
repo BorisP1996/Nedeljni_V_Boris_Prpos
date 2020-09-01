@@ -1,0 +1,123 @@
+﻿<Window x:Class="Zadatak_1.View.MainUserView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Zadatak_1.View"
+        mc:Ignorable="d"
+        Title="MainUserView" Height="600" Width="1300">
+    <Grid Margin="0,0,0,-1">
+        <DataGrid Name="DataGridFeed"
+                  ItemsSource="{Binding UserFeedList, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding UserFeed, UpdateSourceTrigger=PropertyChanged}"
+                  IsReadOnly="True"
+                  HeadersVisibility="Column"
+                  AutoGenerateColumns="False"
+                  HorizontalGridLinesBrush="Black"
+                  BorderBrush="Black"
+                  Foreground="Black"
+                  FontWeight="Bold"
+                  Margin="337,194,375,252">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="User"
+                                    Width="100"
+                                    Binding="{Binding Username}" />
+                <DataGridTextColumn Header="Publish date"
+                                    Width="100"
+                                    Binding="{Binding PublishDate,StringFormat=\{0:dd.MM.yy \}}" />
+                <DataGridTextColumn Header="Content"
+                                    Width="300"
+                                    Binding="{Binding FeedContent}" />
+                <DataGridTextColumn Header="Likes"
+                                    Width="50"
+                                    Binding="{Binding LikeNumbers}" />
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button  Command="{Binding Path=DataContext.Like, RelativeSource= {RelativeSource FindAncestor,
+                                       AncestorType={x:Type DataGrid}},UpdateSourceTrigger=PropertyChanged}"
+                                     Content="Like" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button  Command="{Binding Path=DataContext.LikeList, RelativeSource= {RelativeSource FindAncestor,
+                                       AncestorType={x:Type DataGrid}},UpdateSourceTrigger=PropertyChanged}"
+                                     Content="Like list" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Name="DataGridUsers"
+                  ItemsSource="{Binding UserList, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding User, UpdateSourceTrigger=PropertyChanged}"
+                  IsReadOnly="True"
+                  HeadersVisibility="Column"
+                  AutoGenerateColumns="False"
+                  HorizontalGridLinesBrush="Black"
+                  BorderBrush="Black"
+                  Foreground="Black"
+                  FontWeight="Bold"
+                  Margin="32,56,1046,192">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="User"
+                                    Width="100"
+                                    Binding="{Binding Username}" />
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button  Command="{Binding Path=DataContext.ViewProfile, RelativeSource= {RelativeSource FindAncestor,
+                                       AncestorType={x:Type DataGrid}},UpdateSourceTrigger=PropertyChanged}"
+                                     Content="View profile" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button  Command="{Binding Path=DataContext.SendRequest, RelativeSource= {RelativeSource FindAncestor,
+                                       AncestorType={x:Type DataGrid}},UpdateSourceTrigger=PropertyChanged}"
+                                     Content="Send request" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="DataGridRequests"
+                  ItemsSource="{Binding UserRequestList, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding UserRequest, UpdateSourceTrigger=PropertyChanged}"
+                  IsReadOnly="True"
+                  HeadersVisibility="Column"
+                  AutoGenerateColumns="False"
+                  HorizontalGridLinesBrush="Black"
+                  BorderBrush="Black"
+                  Foreground="Black"
+                  FontWeight="Bold"
+                  Margin="1002,56,76,192">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="User"
+                                    Width="100"
+                                    Binding="{Binding Username}" />
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button  Command="{Binding DataContext.Accept, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, UpdateSourceTrigger=PropertyChanged}"
+                                     Content="Accept" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button  Command="{Binding DataContext.Reject, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, UpdateSourceTrigger=PropertyChanged}"
+                                     Content="Reject" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

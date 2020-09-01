@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Input;
 using Zadatak_1.Model;
 using Zadatak_1.Service;
+using Zadatak_1.View;
 
 namespace Zadatak_1.ViewModel
 {
@@ -139,6 +140,8 @@ namespace Zadatak_1.ViewModel
                             context.tblUsers.Add(newUser);
                             MessageBox.Show("You have succsesfully registered.");
                             context.SaveChanges();
+                            MainUserView userView = new MainUserView(Username);
+                            userView.ShowDialog();
                         }
                         else
                         {
@@ -156,6 +159,9 @@ namespace Zadatak_1.ViewModel
                     else if (tool.UsernameExist(Username) == false && tool.CredentialsMatch(Username,Password)==true)
                     {
                         MessageBox.Show("Welcome!");
+                        MainUserView userView = new MainUserView(Username);
+                        userView.ShowDialog();
+                        
                     }
                     else
                     {

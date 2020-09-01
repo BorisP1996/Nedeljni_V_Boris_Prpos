@@ -73,5 +73,57 @@ namespace Zadatak_1.Service
                 return false;
             }
         }
+
+        public List<vwUser_Feed> GetFeeds()
+        {
+            try
+            {
+                using (Entity context = new Entity())
+                {
+                    List<vwUser_Feed> list = context.vwUser_Feed.ToList();
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+                return null;
+            }
+        }
+        public List<vwUser_Request_Receiving> GetRequests()
+        {
+            try
+            {
+                using (Entity context = new Entity())
+                {
+                    List<vwUser_Request_Receiving> list = context.vwUser_Request_Receiving.ToList();
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+                return null;
+            }
+        }
+        public List<tblUser> GetUsers()
+        {
+            try
+            {
+                using (Entity context = new Entity())
+                {
+                    List<tblUser> list = context.tblUsers.ToList();
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+                return null;
+            }
+        }
     }
 }
