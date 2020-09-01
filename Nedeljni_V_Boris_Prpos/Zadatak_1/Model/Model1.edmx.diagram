@@ -17,6 +17,8 @@
         <AssociationConnector Association="Nedeljni_V_Boris_Prpos_DDLModel.FK__tblProfil__UserI__6383C8BA" ManuallyRouted="false" />
         <AssociationConnector Association="Nedeljni_V_Boris_Prpos_DDLModel.FK__tblReques__UserI__60A75C0F" ManuallyRouted="false" />
         <AssociationConnector Association="Nedeljni_V_Boris_Prpos_DDLModel.FK__tblReques__UserI__619B8048" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Nedeljni_V_Boris_Prpos_DDLModel.tblLikeList" Width="1.5" PointX="5.375" PointY="8.75" />
+        <EntityTypeShape EntityType="Nedeljni_V_Boris_Prpos_DDLModel.vwFeed_Like" Width="1.5" PointX="8.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

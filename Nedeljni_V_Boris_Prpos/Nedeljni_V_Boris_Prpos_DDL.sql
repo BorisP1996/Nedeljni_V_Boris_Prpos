@@ -17,6 +17,9 @@ drop table tblRequest;
 if exists (SELECT name FROM sys.sysobjects WHERE name = 'tblUser')
 drop table tblUser;
 
+if exists (SELECT name FROM sys.sysobjects WHERE name = 'tblLikeList')
+drop table tblLikeList;
+
 if OBJECT_ID('vwUser_Profile','v') IS NOT NULL DROP VIEW vwUser_Profile;
 
 if OBJECT_ID('vwUser_Feed','v') IS NOT NULL DROP VIEW vwUser_Feed;
@@ -24,6 +27,8 @@ if OBJECT_ID('vwUser_Feed','v') IS NOT NULL DROP VIEW vwUser_Feed;
 if OBJECT_ID('vwUser_Request_Sending','v') IS NOT NULL DROP VIEW vwUser_Request_Sending;
 
 if OBJECT_ID('vwUser_Request_Receiving','v') IS NOT NULL DROP VIEW vwUser_Request_Receiving;
+
+if OBJECT_ID('vwFeed_Like','v') IS NOT NULL DROP VIEW vwFeed_Like;
 
 create table tblUser (
 UserID int identity(1,1) primary key,
@@ -54,7 +59,11 @@ Interests nvarchar(100) not null,
 Age int not null
 )
 
-
+create Table tblLikeList(
+LikeListID int identity(1,1) primary key,
+Feed_ID int ,
+UserLikedID int
+)
 
 Alter Table tblRequest
 Add foreign key (UserID_Sending) references tblUser(UserID);
@@ -97,6 +106,12 @@ CREATE VIEW vwUser_Request_Receiving AS
 	From tblRequest,tblUser
 	WHERE	tblRequest.UserID_Receiving = tblUser.UserID
 
+			GO
+CREATE VIEW vwFeed_Like AS
+	SELECT	tblFeed.*,
+			tblLikeList.LikeListID,tblLikeList.UserLikedID
+	From tblFeed,tblLikeList
+	WHERE	tblFeed.FeedID = tblLikeList.Feed_ID
 
 
 	
