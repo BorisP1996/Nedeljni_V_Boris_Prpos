@@ -30,6 +30,17 @@ namespace Zadatak_1.ViewModel
         }
 
         #region Properties
+
+        private string post;
+
+        public string Post
+        {
+            get { return post; }
+            set { post = value;
+                OnPropertyChanged("Post");
+            }
+        }
+
         private string username;
 
         public string Username
@@ -419,6 +430,110 @@ namespace Zadatak_1.ViewModel
         {
             return true;
         }
+
+        private ICommand publish;
+        public ICommand Publish
+        {
+            get
+            {
+                if (publish==null)
+                {
+                    publish = new RelayCommand(param => PublishExecute(), param => CanPublishExecute());
+                }
+                return publish;
+            }
+        }
+
+        private void PublishExecute()
+        {
+            try
+            {
+                MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
+                MessageBoxImage icnMessageBox = MessageBoxImage.Question;
+
+                MessageBoxResult resultMessageBox = MessageBox.Show("Are you sure you want to publish this post?", "Publish approval", btnMessageBox, icnMessageBox);
+
+                if (resultMessageBox == MessageBoxResult.Yes)
+                {
+                    
+                    int userToFindID = (from r in context.tblUsers where r.Username == Username select r.UserID).FirstOrDefault();
+
+                    tblFeed newFeed = new tblFeed();
+                    newFeed.FeedContent = Post;
+                    newFeed.LikeNumbers = 0;
+                    newFeed.PublishDate = DateTime.Now;
+                    newFeed.UserID = userToFindID;
+                    context.tblFeeds.Add(newFeed);
+                    context.SaveChanges();
+                    MessageBox.Show("Your post is public.");
+                    UserFeedList = tool.GetFeeds();
+                    Post = "";
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private bool CanPublishExecute()
+        {
+            if (String.IsNullOrEmpty(Post) || Post.Length>100)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private ICommand close;
+        public ICommand Close
+        {
+            get
+            {
+                if (close == null)
+                {
+                    close = new RelayCommand(param => CloseExecute(), param => CanCloseExecute());
+                }
+                return close;
+            }
+        }
+        private void CloseExecute()
+        {
+            mainUserView.Close();
+        }
+        private bool CanCloseExecute()
+        {
+            return true;
+        }
+
+        private ICommand change;
+        public ICommand Change
+        {
+            get
+            {
+                if (change==null)
+                {
+                    change = new RelayCommand(param => ChangeExecute(), param => CanChangeExecute());
+                }
+                return change;
+            }
+        }
+
+        private void ChangeExecute()
+        {
+            ChangePassword change = new ChangePassword(Username);
+            change.ShowDialog();
+        }
+
+        private bool CanChangeExecute()
+        {
+            return true;
+        }
+
         #endregion
     }
 }
