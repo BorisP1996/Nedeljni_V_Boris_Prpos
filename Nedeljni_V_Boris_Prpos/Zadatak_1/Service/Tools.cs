@@ -91,14 +91,29 @@ namespace Zadatak_1.Service
                 return null;
             }
         }
-        public List<vwUser_Request_Receiving> GetRequests()
+        public List<vwUser_Request_Sending> GetRequests(string Username)
         {
             try
             {
                 using (Entity context = new Entity())
                 {
-                    List<vwUser_Request_Receiving> list = context.vwUser_Request_Receiving.ToList();
-                    return list;
+                    tblUser userToFind = (from r in context.tblUsers where r.Username == Username select r).FirstOrDefault();
+                    List<vwUser_Request_Sending> list = context.vwUser_Request_Sending.ToList();
+                    List<vwUser_Request_Sending> myRequests = new List<vwUser_Request_Sending>();
+
+                    foreach (vwUser_Request_Sending item in list)
+                    {
+                        if (item.UserID_Receiving == userToFind.UserID && item.Approved==false) 
+                        {
+                            myRequests.Add(item);
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+
+                    return myRequests;
                 }
             }
             catch (Exception ex)
@@ -108,14 +123,24 @@ namespace Zadatak_1.Service
                 return null;
             }
         }
-        public List<tblUser> GetUsers()
+        public List<tblUser> GetUsers(string Username)
         {
             try
             {
                 using (Entity context = new Entity())
                 {
                     List<tblUser> list = context.tblUsers.ToList();
-                    return list;
+                    List<tblUser> allExceptMe = new List<tblUser>();
+
+                    foreach (tblUser item in list)
+                    {
+                        if (item.Username!=Username)
+                        {
+                            allExceptMe.Add(item);
+                        }
+                    }
+
+                    return allExceptMe;
                 }
             }
             catch (Exception ex)
@@ -123,6 +148,102 @@ namespace Zadatak_1.Service
 
                 MessageBox.Show(ex.ToString());
                 return null;
+            }
+        }
+        public bool IfAlreadyLiked(int FeedIDinput, int UserIDinput)
+        {
+            try
+            {
+                using (Entity context = new Entity())
+                {
+                    List<tblLikeList> list = context.tblLikeLists.ToList();
+
+                    foreach (tblLikeList item in list)
+                    {
+                        if (item.Feed_ID==FeedIDinput && item.UserLikedID==UserIDinput)
+                        {
+                            return false;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+                return false;
+            }
+        }
+        public bool AreTheyFriends(int UserOne, int UserTwo)
+        {
+            try
+            {
+                using (Entity context = new Entity())
+                {
+                    List<tblRequest> list = context.tblRequests.ToList();
+
+                    foreach (tblRequest item in list)
+                    {
+                        if (item.UserID_Sending==UserOne && item.UserID_Receiving==UserTwo && item.Approved==true)
+                        {
+                            return true;
+                        }
+                        else if (item.UserID_Sending == UserTwo && item.UserID_Receiving == UserOne && item.Approved == true)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+                return false;
+            }
+        }
+
+        public bool StatusPending(int UserOne, int UserTwo)
+        {
+            try
+            {
+                using (Entity context = new Entity())
+                {
+                    List<tblRequest> list = context.tblRequests.ToList();
+
+                    foreach (tblRequest item in list)
+                    {
+                        if (item.UserID_Sending == UserOne && item.UserID_Receiving == UserTwo && item.Approved == false)
+                        {
+                            return true;
+                        }
+                        else if (item.UserID_Sending == UserTwo && item.UserID_Receiving == UserOne && item.Approved == false)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+                return false;
             }
         }
     }

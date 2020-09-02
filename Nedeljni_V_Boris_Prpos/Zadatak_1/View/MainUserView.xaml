@@ -98,7 +98,7 @@
                   FontWeight="Bold"
                   Margin="1002,56,76,192">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="User"
+                <DataGridTextColumn Header="Request list"
                                     Width="100"
                                     Binding="{Binding Username}" />
                 <DataGridTemplateColumn>
