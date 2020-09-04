@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Zadatak_1"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Background="AliceBlue">
         <Button Content="Close"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"

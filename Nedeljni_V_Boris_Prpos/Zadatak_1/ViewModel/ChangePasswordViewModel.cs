@@ -51,6 +51,17 @@ namespace Zadatak_1.ViewModel
             }
         }
 
+        private string confirm;
+
+        public string Confirm
+        {
+            get { return confirm; }
+            set { confirm = value;
+                OnPropertyChanged("Confirm");
+            }
+        }
+
+
         private ICommand save;
         public ICommand Save
         {
@@ -82,7 +93,7 @@ namespace Zadatak_1.ViewModel
 
                 if (resultMessageBox == MessageBoxResult.Yes)
                 {
-                    if (oldPassword == Old && New.Length > 0)
+                    if (oldPassword == Old && New.Length > 0 && New==Confirm)
                     {
                         tblUser userToFind = (from r in context.tblUsers where r.Username == Username select r).FirstOrDefault();
                         userToFind.Pasword = New;
@@ -90,7 +101,12 @@ namespace Zadatak_1.ViewModel
                         MessageBox.Show("Password is changed");
                         New = "";
                         Old = "";
+                        Confirm="";
 
+                    }
+                    else if (New!=Confirm)
+                    {
+                        MessageBox.Show("Your confirmation is not correct.");
                     }
                     else if (oldPassword!=Old)
                     {

@@ -112,6 +112,37 @@ namespace Zadatak_1.ViewModel
         #endregion
 
         #region Commands
+        private ICommand viewProfile;
+        public ICommand ViewProfile
+        {
+            get
+            {
+                if (viewProfile==null)
+                {
+                    viewProfile = new RelayCommand(param => ViewProfileExecute(), param => CanViewProfileExecute());
+                }
+                return viewProfile;
+            }
+        }
+
+        private void ViewProfileExecute()
+        {
+            try
+            {
+                ViewProfile viewProfile = new ViewProfile(User.UserID);
+                viewProfile.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private bool CanViewProfileExecute()
+        {
+            return true;
+        }
 
         private ICommand like;
         public ICommand Like
@@ -158,7 +189,7 @@ namespace Zadatak_1.ViewModel
                     }
                     else if (tool.AreTheyFriends(userToFind.UserID,UserFeed.UserID) == false)
                     {
-                        MessageBox.Show("You are can not like this feed because you are not friend with the publisher.");
+                        MessageBox.Show("You can not like this feed because you are not friend with the publisher.");
                     }
                     else if (tool.IfAlreadyLiked(FeedID, userToFind.UserID) == false)
                     {
@@ -534,6 +565,37 @@ namespace Zadatak_1.ViewModel
             return true;
         }
 
+        private ICommand profile;
+        public ICommand Profile
+        {
+            get
+            {
+                if (profile==null)
+                {
+                    profile = new RelayCommand(param => ProfileExecute(), param => CanProfileExecute());
+                }
+                return profile;
+            }
+        }
+
+        private void ProfileExecute()
+        {
+            try
+            {
+                Profile profile = new Profile(Username);
+                profile.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private bool CanProfileExecute()
+        {
+            return true;
+        }
         #endregion
     }
 }

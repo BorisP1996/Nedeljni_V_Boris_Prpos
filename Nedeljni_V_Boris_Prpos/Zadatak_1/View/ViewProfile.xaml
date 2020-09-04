@@ -1,0 +1,49 @@
+﻿<Window x:Class="Zadatak_1.View.ViewProfile"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Zadatak_1.View"
+        mc:Ignorable="d"
+        Title="ViewProfile" Height="450" Width="800">
+    <Grid Background="AliceBlue">
+        <Label Content="About:"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Margin="24,30,0,0" />
+        <Label Content="Interests:"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Margin="24,72,0,0" />
+        <Label Content="Age:"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Margin="24,132,0,0" />
+        <Label Content="{Binding Profile.About,UpdateSourceTrigger=PropertyChanged}"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Margin="82,30,0,0"
+               Width="629"
+               Height="26"
+               x:Name="lblAbout" />
+        <Label Content="{Binding Profile.Interests, UpdateSourceTrigger=PropertyChanged}"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Margin="87,72,0,0"
+               Width="624"
+               Height="26"
+               x:Name="lblInterests" />
+        <Label Content="{Binding Profile.Age, UpdateSourceTrigger=PropertyChanged}"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Margin="87,132,0,0"
+               Width="104"
+               x:Name="lblAge" />
+        <Button Content="Close"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="75"
+                Margin="356,235,0,0" 
+                Command="{Binding Close,UpdateSourceTrigger=PropertyChanged}"/>
+    </Grid>
+</Window>

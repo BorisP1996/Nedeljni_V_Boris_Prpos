@@ -91,6 +91,36 @@ namespace Zadatak_1.Service
                 return null;
             }
         }
+        public List<vwUser_Feed> GetMyFeeds(string username)
+        {
+            try
+            {
+                using (Entity context = new Entity())
+                {
+                    List<vwUser_Feed> list = context.vwUser_Feed.ToList();
+                    List<vwUser_Feed> myList = new List<vwUser_Feed>();
+
+                    foreach (vwUser_Feed item in list)
+                    {
+                        if (item.Username==username)
+                        {
+                            myList.Add(item);
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                    return myList;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+                return null;
+            }
+        }
         public List<vwUser_Request_Sending> GetRequests(string Username)
         {
             try
@@ -244,6 +274,108 @@ namespace Zadatak_1.Service
 
                 MessageBox.Show(ex.ToString());
                 return false;
+            }
+        }
+
+        public vwUser_Profile FindProfile(string Username)
+        {
+            try
+            {
+                using (Entity context = new Entity())
+                {
+                    vwUser_Profile profileToFind = (from r in context.vwUser_Profile where r.Username == Username select r).FirstOrDefault();
+                    return profileToFind;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+                return null;
+            }
+        }
+
+        public tblProfile FindTblProfile(string username)
+        {
+            try
+            {
+                using (Entity context = new Entity())
+                {
+                    tblUser userToFind = (from r in context.tblUsers where r.Username == username select r).FirstOrDefault();
+                    tblProfile profileToFind = (from r in context.tblProfiles where r.UserID == userToFind.UserID select r).FirstOrDefault();
+
+                    return profileToFind;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+                return null;
+            }
+        }
+
+        public string About (string username)
+        {
+            try
+            {
+                using (Entity context = new Entity()) 
+                {
+
+                    tblUser userToFind = (from r in context.tblUsers where r.Username == username select r).FirstOrDefault();
+
+                    tblProfile profileToFind = (from r in context.tblProfiles where r.UserID == userToFind.UserID select r).FirstOrDefault();
+                    return profileToFind.About;
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+                return null;
+            }
+        }
+        public string Interests(string username)
+        {
+            try
+            {
+                using (Entity context = new Entity())
+                {
+
+                    tblUser userToFind = (from r in context.tblUsers where r.Username == username select r).FirstOrDefault();
+
+                    tblProfile profileToFind = (from r in context.tblProfiles where r.UserID == userToFind.UserID select r).FirstOrDefault();
+                    return profileToFind.Interests;
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+                return null;
+            }
+        }
+        public string Age(string username)
+        {
+            try
+            {
+                using (Entity context = new Entity())
+                {
+
+                    tblUser userToFind = (from r in context.tblUsers where r.Username == username select r).FirstOrDefault();
+
+                    tblProfile profileToFind = (from r in context.tblProfiles where r.UserID == userToFind.UserID select r).FirstOrDefault();
+                    return profileToFind.Age.ToString();
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+                return null;
             }
         }
     }
