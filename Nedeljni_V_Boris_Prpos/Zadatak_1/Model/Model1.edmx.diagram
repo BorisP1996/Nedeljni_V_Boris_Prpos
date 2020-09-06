@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1627df412b9b458281e6130462c00350" Name="Diagram1">
+        <EntityTypeShape EntityType="Nedeljni_V_Boris_Prpos_DDLModel.tblFeed" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nedeljni_V_Boris_Prpos_DDLModel.tblProfile" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nedeljni_V_Boris_Prpos_DDLModel.tblRequest" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nedeljni_V_Boris_Prpos_DDLModel.tblUser" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nedeljni_V_Boris_Prpos_DDLModel.vwUser_Feed" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nedeljni_V_Boris_Prpos_DDLModel.vwUser_Profile" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nedeljni_V_Boris_Prpos_DDLModel.vwUser_Request_Receiving" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nedeljni_V_Boris_Prpos_DDLModel.vwUser_Request_Sending" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="Nedeljni_V_Boris_Prpos_DDLModel.FK__tblFeed__UserID__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="Nedeljni_V_Boris_Prpos_DDLModel.FK__tblProfil__UserI__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="Nedeljni_V_Boris_Prpos_DDLModel.FK__tblReques__UserI__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="Nedeljni_V_Boris_Prpos_DDLModel.FK__tblReques__UserI__619B8048" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Nedeljni_V_Boris_Prpos_DDLModel.tblLikeList" Width="1.5" PointX="5.375" PointY="8.75" />
+        <EntityTypeShape EntityType="Nedeljni_V_Boris_Prpos_DDLModel.vwFeed_Like" Width="1.5" PointX="8.375" PointY="6.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

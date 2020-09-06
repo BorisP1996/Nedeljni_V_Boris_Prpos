@@ -1,0 +1,128 @@
+﻿<Window x:Class="Zadatak_1.View.Profile"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Zadatak_1.View"
+        mc:Ignorable="d"
+        Title="Profile"
+        Height="471"
+        Width="837">
+    <Grid Margin="0,0,2,0"
+          Background="AliceBlue">
+        <DataGrid Name="DataGridFeed"
+                  ItemsSource="{Binding UserFeedList, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding UserFeed, UpdateSourceTrigger=PropertyChanged}"
+                  IsReadOnly="True"
+                  HeadersVisibility="Column"
+                  AutoGenerateColumns="False"
+                  HorizontalGridLinesBrush="Black"
+                  BorderBrush="Black"
+                  Foreground="Black"
+                  FontWeight="Bold"
+                  Margin="24,251,190,24">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="User"
+                                    Width="100"
+                                    Binding="{Binding Username}" />
+                <DataGridTextColumn Header="Publish date"
+                                    Width="100"
+                                    Binding="{Binding PublishDate,StringFormat=\{0:dd.MM.yy \}}" />
+                <DataGridTextColumn Header="Content"
+                                    Width="300"
+                                    Binding="{Binding FeedContent}" />
+                <DataGridTextColumn Header="Likes"
+                                    Width="50"
+                                    Binding="{Binding LikeNumbers}" />
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button  Command="{Binding Path=DataContext.LikeList, RelativeSource= {RelativeSource FindAncestor,
+                                       AncestorType={x:Type DataGrid}},UpdateSourceTrigger=PropertyChanged}"
+                                     Content="Like list" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Name="DataGridUsers"
+                  ItemsSource="{Binding UserList, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding User, UpdateSourceTrigger=PropertyChanged}"
+                  IsReadOnly="True"
+                  HeadersVisibility="Column"
+                  AutoGenerateColumns="False"
+                  HorizontalGridLinesBrush="Black"
+                  BorderBrush="Black"
+                  Foreground="Black"
+                  FontWeight="Bold"
+                  Margin="24,90,1045,158">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="User"
+                                    Width="100"
+                                    Binding="{Binding Username}" />
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button  Command="{Binding Path=DataContext.ViewProfile, RelativeSource= {RelativeSource FindAncestor,
+                                       AncestorType={x:Type DataGrid}},UpdateSourceTrigger=PropertyChanged}"
+                                     Content="View profile" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button  Command="{Binding Path=DataContext.SendRequest, RelativeSource= {RelativeSource FindAncestor,
+                                       AncestorType={x:Type DataGrid}},UpdateSourceTrigger=PropertyChanged}"
+                                     Content="Send request" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Close"
+                HorizontalAlignment="Left"
+                Margin="724,396,0,0"
+                VerticalAlignment="Top"
+                Width="75"
+                Command="{Binding Close,UpdateSourceTrigger=PropertyChanged}" />
+        <Label Content="About:"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Margin="24,30,0,0" />
+        <Label Content="Interests:"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Margin="24,72,0,0" />
+        <Label Content="Age:"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Margin="24,124,0,0" />
+        <Label Content="{Binding Profile.About,UpdateSourceTrigger=PropertyChanged}"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Margin="82,30,0,0"
+               Width="629"
+               Height="26"
+               x:Name="lblAbout" />
+        <Label Content="{Binding Profile.Interests, UpdateSourceTrigger=PropertyChanged}"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Margin="87,72,0,0"
+               Width="624"
+               Height="26"
+               x:Name="lblInterests" />
+        <Label Content="{Binding Profile.Age, UpdateSourceTrigger=PropertyChanged}"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Margin="87,124,0,0"
+               Width="104"
+               x:Name="lblAge" />
+        <Button Content="Add/Edit"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="75"
+                Margin="24,165,0,0"
+                Command="{Binding AddEdit,UpdateSourceTrigger=PropertyChanged}" />
+    </Grid>
+</Window>

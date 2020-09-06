@@ -1,0 +1,624 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Nedeljni_V_Boris_Prpos_DDLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblFeed">
+          <Key>
+            <PropertyRef Name="FeedID" />
+          </Key>
+          <Property Name="FeedID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="FeedContent" Type="nvarchar" MaxLength="100" />
+          <Property Name="PublishDate" Type="date" Nullable="false" />
+          <Property Name="LikeNumbers" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblLikeList">
+          <Key>
+            <PropertyRef Name="LikeListID" />
+          </Key>
+          <Property Name="LikeListID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Feed_ID" Type="int" />
+          <Property Name="UserLikedID" Type="int" />
+        </EntityType>
+        <EntityType Name="tblProfile">
+          <Key>
+            <PropertyRef Name="ProileID" />
+          </Key>
+          <Property Name="ProileID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="About" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Interests" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblRequest">
+          <Key>
+            <PropertyRef Name="RequestID" />
+          </Key>
+          <Property Name="RequestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID_Sending" Type="int" Nullable="false" />
+          <Property Name="UserID_Receiving" Type="int" Nullable="false" />
+          <Property Name="Approved" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pasword" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Nedeljni_V_Boris_Prpos_DDL.dbo.vwFeed_Like' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwFeed_Like">
+          <Key>
+            <PropertyRef Name="FeedID" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="PublishDate" />
+            <PropertyRef Name="LikeNumbers" />
+            <PropertyRef Name="LikeListID" />
+          </Key>
+          <Property Name="FeedID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="FeedContent" Type="nvarchar" MaxLength="100" />
+          <Property Name="PublishDate" Type="date" Nullable="false" />
+          <Property Name="LikeNumbers" Type="int" Nullable="false" />
+          <Property Name="LikeListID" Type="int" Nullable="false" />
+          <Property Name="UserLikedID" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Nedeljni_V_Boris_Prpos_DDL.dbo.vwUser_Feed' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwUser_Feed">
+          <Key>
+            <PropertyRef Name="FeedID" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="PublishDate" />
+            <PropertyRef Name="LikeNumbers" />
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="Pasword" />
+          </Key>
+          <Property Name="FeedID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="FeedContent" Type="nvarchar" MaxLength="100" />
+          <Property Name="PublishDate" Type="date" Nullable="false" />
+          <Property Name="LikeNumbers" Type="int" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pasword" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Nedeljni_V_Boris_Prpos_DDL.dbo.vwUser_Profile' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwUser_Profile">
+          <Key>
+            <PropertyRef Name="ProileID" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="About" />
+            <PropertyRef Name="Interests" />
+            <PropertyRef Name="Age" />
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="Pasword" />
+          </Key>
+          <Property Name="ProileID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="About" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Interests" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pasword" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Nedeljni_V_Boris_Prpos_DDL.dbo.vwUser_Request_Receiving' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwUser_Request_Receiving">
+          <Key>
+            <PropertyRef Name="RequestID" />
+            <PropertyRef Name="UserID_Sending" />
+            <PropertyRef Name="UserID_Receiving" />
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="Pasword" />
+          </Key>
+          <Property Name="RequestID" Type="int" Nullable="false" />
+          <Property Name="UserID_Sending" Type="int" Nullable="false" />
+          <Property Name="UserID_Receiving" Type="int" Nullable="false" />
+          <Property Name="Approved" Type="bit" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pasword" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Nedeljni_V_Boris_Prpos_DDL.dbo.vwUser_Request_Sending' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwUser_Request_Sending">
+          <Key>
+            <PropertyRef Name="RequestID" />
+            <PropertyRef Name="UserID_Sending" />
+            <PropertyRef Name="UserID_Receiving" />
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="Pasword" />
+          </Key>
+          <Property Name="RequestID" Type="int" Nullable="false" />
+          <Property Name="UserID_Sending" Type="int" Nullable="false" />
+          <Property Name="UserID_Receiving" Type="int" Nullable="false" />
+          <Property Name="Approved" Type="bit" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pasword" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tblFeed__UserID__4E53A1AA">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblFeed" Type="Self.tblFeed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tblFeed">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblProfil__UserI__4F47C5E3">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblProfile" Type="Self.tblProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tblProfile">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblReques__UserI__4C6B5938">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblRequest" Type="Self.tblRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tblRequest">
+              <PropertyRef Name="UserID_Sending" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblReques__UserI__4D5F7D71">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblRequest" Type="Self.tblRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tblRequest">
+              <PropertyRef Name="UserID_Receiving" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Nedeljni_V_Boris_Prpos_DDLModelStoreContainer">
+          <EntitySet Name="tblFeed" EntityType="Self.tblFeed" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblLikeList" EntityType="Self.tblLikeList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProfile" EntityType="Self.tblProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblRequest" EntityType="Self.tblRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwFeed_Like" EntityType="Self.vwFeed_Like" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwFeed_Like].[FeedID] AS [FeedID], 
+    [vwFeed_Like].[UserID] AS [UserID], 
+    [vwFeed_Like].[FeedContent] AS [FeedContent], 
+    [vwFeed_Like].[PublishDate] AS [PublishDate], 
+    [vwFeed_Like].[LikeNumbers] AS [LikeNumbers], 
+    [vwFeed_Like].[LikeListID] AS [LikeListID], 
+    [vwFeed_Like].[UserLikedID] AS [UserLikedID]
+    FROM [dbo].[vwFeed_Like] AS [vwFeed_Like]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwUser_Feed" EntityType="Self.vwUser_Feed" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwUser_Feed].[FeedID] AS [FeedID], 
+    [vwUser_Feed].[UserID] AS [UserID], 
+    [vwUser_Feed].[FeedContent] AS [FeedContent], 
+    [vwUser_Feed].[PublishDate] AS [PublishDate], 
+    [vwUser_Feed].[LikeNumbers] AS [LikeNumbers], 
+    [vwUser_Feed].[Username] AS [Username], 
+    [vwUser_Feed].[Pasword] AS [Pasword]
+    FROM [dbo].[vwUser_Feed] AS [vwUser_Feed]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwUser_Profile" EntityType="Self.vwUser_Profile" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwUser_Profile].[ProileID] AS [ProileID], 
+    [vwUser_Profile].[UserID] AS [UserID], 
+    [vwUser_Profile].[About] AS [About], 
+    [vwUser_Profile].[Interests] AS [Interests], 
+    [vwUser_Profile].[Age] AS [Age], 
+    [vwUser_Profile].[Username] AS [Username], 
+    [vwUser_Profile].[Pasword] AS [Pasword]
+    FROM [dbo].[vwUser_Profile] AS [vwUser_Profile]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwUser_Request_Receiving" EntityType="Self.vwUser_Request_Receiving" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwUser_Request_Receiving].[RequestID] AS [RequestID], 
+    [vwUser_Request_Receiving].[UserID_Sending] AS [UserID_Sending], 
+    [vwUser_Request_Receiving].[UserID_Receiving] AS [UserID_Receiving], 
+    [vwUser_Request_Receiving].[Approved] AS [Approved], 
+    [vwUser_Request_Receiving].[Username] AS [Username], 
+    [vwUser_Request_Receiving].[Pasword] AS [Pasword]
+    FROM [dbo].[vwUser_Request_Receiving] AS [vwUser_Request_Receiving]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwUser_Request_Sending" EntityType="Self.vwUser_Request_Sending" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwUser_Request_Sending].[RequestID] AS [RequestID], 
+    [vwUser_Request_Sending].[UserID_Sending] AS [UserID_Sending], 
+    [vwUser_Request_Sending].[UserID_Receiving] AS [UserID_Receiving], 
+    [vwUser_Request_Sending].[Approved] AS [Approved], 
+    [vwUser_Request_Sending].[Username] AS [Username], 
+    [vwUser_Request_Sending].[Pasword] AS [Pasword]
+    FROM [dbo].[vwUser_Request_Sending] AS [vwUser_Request_Sending]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__tblFeed__UserID__4E53A1AA" Association="Self.FK__tblFeed__UserID__4E53A1AA">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblFeed" EntitySet="tblFeed" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblProfil__UserI__4F47C5E3" Association="Self.FK__tblProfil__UserI__4F47C5E3">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblProfile" EntitySet="tblProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblReques__UserI__4C6B5938" Association="Self.FK__tblReques__UserI__4C6B5938">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblRequest" EntitySet="tblRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblReques__UserI__4D5F7D71" Association="Self.FK__tblReques__UserI__4D5F7D71">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblRequest" EntitySet="tblRequest" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Nedeljni_V_Boris_Prpos_DDLModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblFeed">
+          <Key>
+            <PropertyRef Name="FeedID" />
+          </Key>
+          <Property Name="FeedID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="FeedContent" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PublishDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LikeNumbers" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblFeed__UserID__628FA481" FromRole="tblFeed" ToRole="tblUser" />
+        </EntityType>
+        <EntityType Name="tblProfile">
+          <Key>
+            <PropertyRef Name="ProileID" />
+          </Key>
+          <Property Name="ProileID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="About" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Interests" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblProfil__UserI__6383C8BA" FromRole="tblProfile" ToRole="tblUser" />
+        </EntityType>
+        <EntityType Name="tblRequest">
+          <Key>
+            <PropertyRef Name="RequestID" />
+          </Key>
+          <Property Name="RequestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID_Sending" Type="Int32" Nullable="false" />
+          <Property Name="UserID_Receiving" Type="Int32" Nullable="false" />
+          <Property Name="Approved" Type="Boolean" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblReques__UserI__60A75C0F" FromRole="tblRequest" ToRole="tblUser" />
+          <NavigationProperty Name="tblUser1" Relationship="Self.FK__tblReques__UserI__619B8048" FromRole="tblRequest" ToRole="tblUser" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pasword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblFeeds" Relationship="Self.FK__tblFeed__UserID__628FA481" FromRole="tblUser" ToRole="tblFeed" />
+          <NavigationProperty Name="tblProfiles" Relationship="Self.FK__tblProfil__UserI__6383C8BA" FromRole="tblUser" ToRole="tblProfile" />
+          <NavigationProperty Name="tblRequests" Relationship="Self.FK__tblReques__UserI__60A75C0F" FromRole="tblUser" ToRole="tblRequest" />
+          <NavigationProperty Name="tblRequests1" Relationship="Self.FK__tblReques__UserI__619B8048" FromRole="tblUser" ToRole="tblRequest" />
+        </EntityType>
+        <EntityType Name="vwUser_Feed">
+          <Key>
+            <PropertyRef Name="FeedID" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="PublishDate" />
+            <PropertyRef Name="LikeNumbers" />
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="Pasword" />
+          </Key>
+          <Property Name="FeedID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="FeedContent" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PublishDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LikeNumbers" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pasword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwUser_Profile">
+          <Key>
+            <PropertyRef Name="ProileID" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="About" />
+            <PropertyRef Name="Interests" />
+            <PropertyRef Name="Age" />
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="Pasword" />
+          </Key>
+          <Property Name="ProileID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="About" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Interests" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pasword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwUser_Request_Receiving">
+          <Key>
+            <PropertyRef Name="RequestID" />
+            <PropertyRef Name="UserID_Sending" />
+            <PropertyRef Name="UserID_Receiving" />
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="Pasword" />
+          </Key>
+          <Property Name="RequestID" Type="Int32" Nullable="false" />
+          <Property Name="UserID_Sending" Type="Int32" Nullable="false" />
+          <Property Name="UserID_Receiving" Type="Int32" Nullable="false" />
+          <Property Name="Approved" Type="Boolean" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pasword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwUser_Request_Sending">
+          <Key>
+            <PropertyRef Name="RequestID" />
+            <PropertyRef Name="UserID_Sending" />
+            <PropertyRef Name="UserID_Receiving" />
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="Pasword" />
+          </Key>
+          <Property Name="RequestID" Type="Int32" Nullable="false" />
+          <Property Name="UserID_Sending" Type="Int32" Nullable="false" />
+          <Property Name="UserID_Receiving" Type="Int32" Nullable="false" />
+          <Property Name="Approved" Type="Boolean" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pasword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tblFeed__UserID__628FA481">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblFeed" Type="Self.tblFeed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tblFeed">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblProfil__UserI__6383C8BA">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblProfile" Type="Self.tblProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tblProfile">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblReques__UserI__60A75C0F">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblRequest" Type="Self.tblRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tblRequest">
+              <PropertyRef Name="UserID_Sending" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblReques__UserI__619B8048">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblRequest" Type="Self.tblRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tblRequest">
+              <PropertyRef Name="UserID_Receiving" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entity" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblFeeds" EntityType="Self.tblFeed" />
+          <EntitySet Name="tblProfiles" EntityType="Self.tblProfile" />
+          <EntitySet Name="tblRequests" EntityType="Self.tblRequest" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+          <EntitySet Name="vwUser_Feed" EntityType="Self.vwUser_Feed" />
+          <EntitySet Name="vwUser_Profile" EntityType="Self.vwUser_Profile" />
+          <EntitySet Name="vwUser_Request_Receiving" EntityType="Self.vwUser_Request_Receiving" />
+          <EntitySet Name="vwUser_Request_Sending" EntityType="Self.vwUser_Request_Sending" />
+          <AssociationSet Name="FK__tblFeed__UserID__628FA481" Association="Self.FK__tblFeed__UserID__628FA481">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblFeed" EntitySet="tblFeeds" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblProfil__UserI__6383C8BA" Association="Self.FK__tblProfil__UserI__6383C8BA">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblProfile" EntitySet="tblProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblReques__UserI__60A75C0F" Association="Self.FK__tblReques__UserI__60A75C0F">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblRequest" EntitySet="tblRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblReques__UserI__619B8048" Association="Self.FK__tblReques__UserI__619B8048">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblRequest" EntitySet="tblRequests" />
+          </AssociationSet>
+          <EntitySet Name="tblLikeLists" EntityType="Nedeljni_V_Boris_Prpos_DDLModel.tblLikeList" />
+          <EntitySet Name="vwFeed_Like" EntityType="Nedeljni_V_Boris_Prpos_DDLModel.vwFeed_Like" />
+        </EntityContainer>
+        <EntityType Name="tblLikeList">
+          <Key>
+            <PropertyRef Name="LikeListID" />
+          </Key>
+          <Property Name="LikeListID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Feed_ID" Type="Int32" />
+          <Property Name="UserLikedID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vwFeed_Like">
+          <Key>
+            <PropertyRef Name="FeedID" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="PublishDate" />
+            <PropertyRef Name="LikeNumbers" />
+            <PropertyRef Name="LikeListID" />
+          </Key>
+          <Property Name="FeedID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="FeedContent" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PublishDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LikeNumbers" Type="Int32" Nullable="false" />
+          <Property Name="LikeListID" Type="Int32" Nullable="false" />
+          <Property Name="UserLikedID" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Nedeljni_V_Boris_Prpos_DDLModelStoreContainer" CdmEntityContainer="Entity">
+          <EntitySetMapping Name="tblFeeds">
+            <EntityTypeMapping TypeName="Nedeljni_V_Boris_Prpos_DDLModel.tblFeed">
+              <MappingFragment StoreEntitySet="tblFeed">
+                <ScalarProperty Name="FeedID" ColumnName="FeedID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FeedContent" ColumnName="FeedContent" />
+                <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
+                <ScalarProperty Name="LikeNumbers" ColumnName="LikeNumbers" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblProfiles">
+            <EntityTypeMapping TypeName="Nedeljni_V_Boris_Prpos_DDLModel.tblProfile">
+              <MappingFragment StoreEntitySet="tblProfile">
+                <ScalarProperty Name="ProileID" ColumnName="ProileID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="About" ColumnName="About" />
+                <ScalarProperty Name="Interests" ColumnName="Interests" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblRequests">
+            <EntityTypeMapping TypeName="Nedeljni_V_Boris_Prpos_DDLModel.tblRequest">
+              <MappingFragment StoreEntitySet="tblRequest">
+                <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+                <ScalarProperty Name="UserID_Sending" ColumnName="UserID_Sending" />
+                <ScalarProperty Name="UserID_Receiving" ColumnName="UserID_Receiving" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="Nedeljni_V_Boris_Prpos_DDLModel.tblUser">
+              <MappingFragment StoreEntitySet="tblUser">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Pasword" ColumnName="Pasword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwUser_Feed">
+            <EntityTypeMapping TypeName="Nedeljni_V_Boris_Prpos_DDLModel.vwUser_Feed">
+              <MappingFragment StoreEntitySet="vwUser_Feed">
+                <ScalarProperty Name="FeedID" ColumnName="FeedID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FeedContent" ColumnName="FeedContent" />
+                <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
+                <ScalarProperty Name="LikeNumbers" ColumnName="LikeNumbers" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Pasword" ColumnName="Pasword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwUser_Profile">
+            <EntityTypeMapping TypeName="Nedeljni_V_Boris_Prpos_DDLModel.vwUser_Profile">
+              <MappingFragment StoreEntitySet="vwUser_Profile">
+                <ScalarProperty Name="ProileID" ColumnName="ProileID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="About" ColumnName="About" />
+                <ScalarProperty Name="Interests" ColumnName="Interests" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Pasword" ColumnName="Pasword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwUser_Request_Receiving">
+            <EntityTypeMapping TypeName="Nedeljni_V_Boris_Prpos_DDLModel.vwUser_Request_Receiving">
+              <MappingFragment StoreEntitySet="vwUser_Request_Receiving">
+                <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+                <ScalarProperty Name="UserID_Sending" ColumnName="UserID_Sending" />
+                <ScalarProperty Name="UserID_Receiving" ColumnName="UserID_Receiving" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Pasword" ColumnName="Pasword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwUser_Request_Sending">
+            <EntityTypeMapping TypeName="Nedeljni_V_Boris_Prpos_DDLModel.vwUser_Request_Sending">
+              <MappingFragment StoreEntitySet="vwUser_Request_Sending">
+                <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+                <ScalarProperty Name="UserID_Sending" ColumnName="UserID_Sending" />
+                <ScalarProperty Name="UserID_Receiving" ColumnName="UserID_Receiving" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Pasword" ColumnName="Pasword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblLikeLists">
+            <EntityTypeMapping TypeName="Nedeljni_V_Boris_Prpos_DDLModel.tblLikeList">
+              <MappingFragment StoreEntitySet="tblLikeList">
+                <ScalarProperty Name="UserLikedID" ColumnName="UserLikedID" />
+                <ScalarProperty Name="Feed_ID" ColumnName="Feed_ID" />
+                <ScalarProperty Name="LikeListID" ColumnName="LikeListID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwFeed_Like">
+            <EntityTypeMapping TypeName="Nedeljni_V_Boris_Prpos_DDLModel.vwFeed_Like">
+              <MappingFragment StoreEntitySet="vwFeed_Like">
+                <ScalarProperty Name="UserLikedID" ColumnName="UserLikedID" />
+                <ScalarProperty Name="LikeListID" ColumnName="LikeListID" />
+                <ScalarProperty Name="LikeNumbers" ColumnName="LikeNumbers" />
+                <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
+                <ScalarProperty Name="FeedContent" ColumnName="FeedContent" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FeedID" ColumnName="FeedID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

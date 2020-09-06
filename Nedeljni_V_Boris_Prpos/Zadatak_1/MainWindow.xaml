@@ -6,7 +6,60 @@
         xmlns:local="clr-namespace:Zadatak_1"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Background="AliceBlue">
+        <Button Content="Close"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="125"
+                Margin="370,330,0,0"
+                Command="{Binding Close,UpdateSourceTrigger=PropertyChanged}" />
+        <Button Content="Continue"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="125"
+                Margin="145,330,0,0"
+                Command="{Binding Login, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox HorizontalAlignment="Left"
+                 Height="23"
+                 TextWrapping="Wrap"
+                 Text="{Binding Username,UpdateSourceTrigger=PropertyChanged}"
+                 VerticalAlignment="Top"
+                 Width="120"
+                 Margin="270,55,0,0" />
+        <TextBox HorizontalAlignment="Left"
+                 Height="23"
+                 TextWrapping="Wrap"
+                 Text="{Binding Password,UpdateSourceTrigger=PropertyChanged}"
+                 VerticalAlignment="Top"
+                 Width="120"
+                 Margin="270,105,0,0"
+                 FontFamily="pack://application:,,,/Resources/#password" />
+        <Label Content="Username:"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Margin="165,54,0,0"
+               Width="85" />
+        <Label Content="Password:"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Margin="165,104,0,0"
+               Width="85" />
+        <CheckBox Content="Register"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  Margin="165,166,0,0"
+                  Width="76" 
+                  IsChecked="{Binding RegisterB,UpdateSourceTrigger=PropertyChanged}"/>
+        <CheckBox Content="Login"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  Margin="165,200,0,0"
+                  Width="76" 
+                  IsChecked="{Binding LoginB,UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Content="Pick one option:"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Margin="35,166,0,0"
+               Width="112" />
     </Grid>
 </Window>
